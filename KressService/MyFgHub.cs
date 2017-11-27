@@ -17,5 +17,15 @@ namespace KressService
             // Call the broadcastMessage method to update clients.
             Clients.All.broadcastMessage( message);
         }
+        public void SendSystemdaten(string sender, FG14Connect.FG14v3.Systemdaten sDaten)
+        {
+            // Call the broadcastMessage method to update clients.
+            Clients.All.broadcastMessage(sender, sDaten);
+        }
+        public void SendFG14Prozessdaten(string sender, FG14Connect.FG14v3.Prozessdaten pData)
+        {
+            // Call the broadcastMessage method to update clients.
+            Clients.All.broadcastMessage(sender,pData);
+        }
     }
 }
