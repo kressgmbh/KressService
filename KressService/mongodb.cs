@@ -13,17 +13,20 @@ namespace KressService
         protected static IMongoClient _client;
         protected static IMongoDatabase _database;
         string dbConnectionStringURL = "ds119736.mlab.com:19736/appharbor_xbngsdnl";
-        string dbConnectionUser = "fg14";
-        string dbConnectionPassword = "fg14Supergeheim";
+        string dbConnectionUser = "x";
+        string dbConnectionPassword = "x";
        
 
         public mongodb()
         {
-            string dbConURL = "mongodb://" + dbConnectionUser + ":" + dbConnectionPassword + "@" + "dbConnectionStringURL";
+            string dbConURL = "mongodb://appharbor_xbngsdnl:8ir3sc2q581odao6bp4bmm480o"+ "@" + dbConnectionStringURL;
             _client = new MongoClient(new MongoUrl(dbConURL));
             _database = _client.GetDatabase("appharbor_xbngsdnl");
 
-            var fg14db = _database.GetCollection<BsonDocument>("fg14");
+         
+            var fg14db = _database.GetCollection<FG14v3.Systemdaten>("fg14");
+        
+         
         }
 
         public async System.Threading.Tasks.Task AddFG14ProzessdataAsync(FG14Connect.FG14v3.Prozessdaten p,string sender)
@@ -63,15 +66,15 @@ namespace KressService
                   {"Timestanp",new BsonDateTime(DateTime.Now)},
                   {"Sender",new BsonString(sender)},
                   {"Type",new BsonString(DsType.Prozessdaten.ToString()) },
-                  {"Sender",new BsonDateTime(s.timestamp)},
-                  {"Sender",new BsonString(s.User)},
-                  {"Sender",new BsonInt32(s.ID)},
-                  {"Sender",new BsonString(s.Text)},
-                  {"Sender",new BsonString(s.ToolNr)}
+                  {"Timestamp",new BsonDateTime(s.timestamp)},
+                  {"User",new BsonString(s.User)},
+                  {"ID",new BsonInt32(s.ID)},
+                  {"Test",new BsonString(s.Text)},
+                  {"Tool",new BsonString(s.ToolNr)}
           
                 };
 
-            await collectionFG14.InsertOneAsync(document);
+             collectionFG14.InsertOneAsync(document).Wait();
 
         }
 
