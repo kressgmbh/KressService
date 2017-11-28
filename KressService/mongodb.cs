@@ -13,8 +13,8 @@ namespace KressService
         protected static IMongoClient _client;
         protected static IMongoDatabase _database;
         string dbConnectionStringURL = "ds119736.mlab.com:19736/appharbor_xbngsdnl";
-        string dbConnectionUser = "x";
-        string dbConnectionPassword = "x";
+        string dbConnectionUser = "appharbor_xbngsdnl";
+        string dbConnectionPassword = "Biebergemünd2";
        
 
         public mongodb()
@@ -26,32 +26,39 @@ namespace KressService
          
             var fg14db = _database.GetCollection<FG14v3.Systemdaten>("fg14");
         
-         
+            FG14Connect.FG14v3.Systemdaten testdaten = new FG14Connect.FG14v3.Systemdaten();
+            testdaten.ID = 1;
+            testdaten.Text = "TEST";
+            testdaten.timestamp = DateTime.Now;
+            testdaten.ToolNr = "0815";
+            testdaten.User = "Kling";
+            fg14db.InsertOneAsync(testdaten).Wait();
+           // AddFG14SystemdatenAsync(testdaten, "Test").Wait();
         }
 
         public async System.Threading.Tasks.Task AddFG14ProzessdataAsync(FG14Connect.FG14v3.Prozessdaten p,string sender)
         {
 
-            var collectionFG14 = _database.GetCollection<BsonDocument>("fg14");
+            var fg14db = _database.GetCollection<FG14v3.Prozessdaten>("fg14");
 
-            var document = new BsonDocument
-                {
-                  {"Timestanp",new BsonDateTime(DateTime.Now)},
-                  {"Sender",new BsonString(sender)},
-                  {"Type",new BsonString(DsType.Prozessdaten.ToString()) },
-                  {"ZeitGesammt",(p.ZeitMontage.TotalSeconds)},
-                  {"ZeitMontage", new BsonDouble(p.ZeitMontage.TotalSeconds)},
-                  { "MaxKraft_Vorweiten", new BsonInt32(p.MaxKraft_Vorweiten)  },
-                  { "MaxKraft_Einschub", new BsonInt32(p.MaxKraft_Einschub) },
-                  { "V_Einschub",  new BsonInt32(p.MaxKraft_Einschub) },
-                  { "V_Vorweiten",  new BsonInt32(p.V_Vorweiten) },
-                  { "Einschubtiefe",  new BsonInt32(p.Einschubtiefe)  },
-                  { "Vorweittiefe",  new BsonInt32(p.Vorweittiefe)  },
-                  { "Rohrlänge", new BsonInt32(p.Rohrlänge)  },
-                  { "Leitungsname",  new BsonString(p.Leitungsname)}
-                };
-
-            await collectionFG14.InsertOneAsync(document);
+            //var document = new BsonDocument
+            //    {
+            //      {"Timestanp",new BsonDateTime(DateTime.Now)},
+            //      {"Sender",new BsonString(sender)},
+            //      {"Type",new BsonString(DsType.Prozessdaten.ToString()) },
+            //      {"ZeitGesammt",(p.ZeitMontage.TotalSeconds)},
+            //      {"ZeitMontage", new BsonDouble(p.ZeitMontage.TotalSeconds)},
+            //      { "MaxKraft_Vorweiten", new BsonInt32(p.MaxKraft_Vorweiten)  },
+            //      { "MaxKraft_Einschub", new BsonInt32(p.MaxKraft_Einschub) },
+            //      { "V_Einschub",  new BsonInt32(p.MaxKraft_Einschub) },
+            //      { "V_Vorweiten",  new BsonInt32(p.V_Vorweiten) },
+            //      { "Einschubtiefe",  new BsonInt32(p.Einschubtiefe)  },
+            //      { "Vorweittiefe",  new BsonInt32(p.Vorweittiefe)  },
+            //      { "Rohrlänge", new BsonInt32(p.Rohrlänge)  },
+            //      { "Leitungsname",  new BsonString(p.Leitungsname)}
+            //    };
+            fg14db.InsertOneAsync(p).Wait();
+          
 
         }
 
@@ -59,22 +66,23 @@ namespace KressService
         public async System.Threading.Tasks.Task AddFG14SystemdatenAsync(FG14Connect.FG14v3.Systemdaten s, string sender)
         {
 
-            var collectionFG14 = _database.GetCollection<BsonDocument>("fg14");
+          //  var collectionFG14 = _database.GetCollection<BsonDocument>("fg14");
+            var fg14db = _database.GetCollection<FG14v3.Systemdaten>("fg14");
 
-            var document = new BsonDocument
-                {
-                  {"Timestanp",new BsonDateTime(DateTime.Now)},
-                  {"Sender",new BsonString(sender)},
-                  {"Type",new BsonString(DsType.Prozessdaten.ToString()) },
-                  {"Timestamp",new BsonDateTime(s.timestamp)},
-                  {"User",new BsonString(s.User)},
-                  {"ID",new BsonInt32(s.ID)},
-                  {"Test",new BsonString(s.Text)},
-                  {"Tool",new BsonString(s.ToolNr)}
-          
-                };
+            //var document = new BsonDocument
+            //    {
+            //      {"Timestanp",new BsonDateTime(DateTime.Now)},
+            //      {"Sender",new BsonString(sender)},
+            //      {"Type",new BsonString(DsType.Prozessdaten.ToString()) },
+            //      {"Timestamp",new BsonDateTime(s.timestamp)},
+            //      {"User",new BsonString(s.User)},
+            //      {"ID",new BsonInt32(s.ID)},
+            //      {"Test",new BsonString(s.Text)},
+            //      {"Tool",new BsonString(s.ToolNr)}
 
-             collectionFG14.InsertOneAsync(document).Wait();
+            //    };
+            fg14db.InsertOneAsync(s).Wait();
+            //collectionFG14.InsertOneAsync(document).Wait();
 
         }
 
