@@ -57,7 +57,7 @@ namespace KressService
             //      { "Rohrlänge", new BsonInt32(p.Rohrlänge)  },
             //      { "Leitungsname",  new BsonString(p.Leitungsname)}
             //    };
-            fg14db.InsertOneAsync(p).Wait();
+            await fg14db.InsertOneAsync(p);
           
 
         }
@@ -81,7 +81,7 @@ namespace KressService
             //      {"Tool",new BsonString(s.ToolNr)}
 
             //    };
-            fg14db.InsertOneAsync(s).Wait();
+            await fg14db.InsertOneAsync(s);
             //collectionFG14.InsertOneAsync(document).Wait();
 
         }
