@@ -43,9 +43,9 @@ namespace KressService
             _database = _client.GetDatabase("appharbor_xbngsdnl");
 
 
-            var fg14db = _database.GetCollection<FG14v3.Systemdaten>("fg14");
+          
 
-            FG14Connect.FG14v3.Systemdaten testdaten = new FG14Connect.FG14v3.Systemdaten();
+         
             var fg14db = _database.GetCollection<FG14v3.Prozessdaten>("fg14");
 
             //var document = new BsonDocument
@@ -79,9 +79,9 @@ namespace KressService
             _database = _client.GetDatabase("appharbor_xbngsdnl");
 
 
-            var fg14db = _database.GetCollection<FG14v3.Systemdaten>("fg14");
+           
 
-            FG14Connect.FG14v3.Systemdaten testdaten = new FG14Connect.FG14v3.Systemdaten();
+           
             var fg14db = _database.GetCollection<FG14v3.Systemdaten>("fg14");
 
             //var document = new BsonDocument
