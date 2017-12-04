@@ -38,7 +38,14 @@ namespace KressService
 
         public async System.Threading.Tasks.Task AddFG14ProzessdataAsync(FG14Connect.FG14v3.Prozessdaten p,string sender)
         {
+            string dbConURL = "mongodb://appharbor_xbngsdnl:8ir3sc2q581odao6bp4bmm480o" + "@" + dbConnectionStringURL;
+            _client = new MongoClient(new MongoUrl(dbConURL));
+            _database = _client.GetDatabase("appharbor_xbngsdnl");
 
+
+            var fg14db = _database.GetCollection<FG14v3.Systemdaten>("fg14");
+
+            FG14Connect.FG14v3.Systemdaten testdaten = new FG14Connect.FG14v3.Systemdaten();
             var fg14db = _database.GetCollection<FG14v3.Prozessdaten>("fg14");
 
             //var document = new BsonDocument
@@ -66,7 +73,15 @@ namespace KressService
         public async System.Threading.Tasks.Task AddFG14SystemdatenAsync(FG14Connect.FG14v3.Systemdaten s, string sender)
         {
 
-          //  var collectionFG14 = _database.GetCollection<BsonDocument>("fg14");
+            //  var collectionFG14 = _database.GetCollection<BsonDocument>("fg14");
+            string dbConURL = "mongodb://appharbor_xbngsdnl:8ir3sc2q581odao6bp4bmm480o" + "@" + dbConnectionStringURL;
+            _client = new MongoClient(new MongoUrl(dbConURL));
+            _database = _client.GetDatabase("appharbor_xbngsdnl");
+
+
+            var fg14db = _database.GetCollection<FG14v3.Systemdaten>("fg14");
+
+            FG14Connect.FG14v3.Systemdaten testdaten = new FG14Connect.FG14v3.Systemdaten();
             var fg14db = _database.GetCollection<FG14v3.Systemdaten>("fg14");
 
             //var document = new BsonDocument
